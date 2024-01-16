@@ -13,7 +13,7 @@ def minOperations(n):
     n -- n H characters in the file
     Return: fewest number of operations or 0 if n is impossible
     """
-    if n < 0:
+    if not isinstance(n, int) or n <= 0:
         return 0
     divs = []
     i = 2
