@@ -30,7 +30,7 @@ try:
                 FileSize = match.group(3)
                 addCodes(match.group(2))
                 TotalFileSize += int(FileSize)
-        print(x)
+
         if i % 10 == 0:
             print(f'File size: {TotalFileSize}')
             for code, nb in sorted(StatusCodes):
