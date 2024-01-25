@@ -34,8 +34,6 @@ try:
             print(f'File size: {TotalFileSize}')
             for code, nb in sorted(StatusCodes):
                 print(f'{code}: {nb}')
-except Exception as err:
-    pass
 finally:
     print(f'File size: {TotalFileSize}')
     for code, nb in sorted(StatusCodes):
