@@ -15,9 +15,7 @@ def addCodes(code):
 
 codes = ['200', '301', '400', '401', '403', '404', '405', '500']
 try:
-    pattern = (r'^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) - '
-               r'\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d+\] '
-               r'"GET \/projects\/260 HTTP\/1\.1" (\d{3}) (\d+)$')
+    pattern = r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3} - \[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d+\] "GET /projects/260 HTTP/1.1" (.{3}) (\d+)'
     i = 0
     TotalFileSize = 0
     StatusCodes = []
