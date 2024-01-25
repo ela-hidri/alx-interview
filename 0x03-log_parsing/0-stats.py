@@ -26,10 +26,10 @@ try:
         i += 1
         match = re.match(pattern, x)
         if (match):
+            FileSize = match.group(3)
             if match.group(2) in codes:
-                FileSize = match.group(3)
                 addCodes(match.group(2))
-                TotalFileSize += int(FileSize)
+            TotalFileSize += int(FileSize)
 
         if i % 10 == 0:
             print(f'File size: {TotalFileSize}')
