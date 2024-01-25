@@ -12,8 +12,10 @@ def addCodes(code):
                 return
         StatusCodes.append((code, 1))
 
+
 try:
-    pattern = r'^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) - \[([^\]]+)\] "GET \/projects\/260 HTTP\/1\.1" (\d{3}) (\d+)$'
+    pattern = (r'^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) - \[([^\]]+)\] '
+               r'"GET \/projects\/260 HTTP\/1\.1" (\d{3}) (\d+)$')
     i = 0
     TotalFileSize = 0
     StatusCodes = []
