@@ -2,6 +2,8 @@
 """ solving Log Parsing """
 import sys
 import re
+
+
 def addCodes(code):
     if code is not None or isinstance(code, int):
         for nb, (stCode, count) in enumerate(StatusCodes):
@@ -13,22 +15,21 @@ pattern = r'^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) - \[([^\]]+)\] "GET \/projects
 i = 0
 TotalFileSize = 0
 StatusCodes = []
-for x in sys.stdin:
-    i += 1
-    match = re.match(pattern, x)
-    if (match):
-        FileSize = match.group(4)
-        addCodes(match.group(3))
-        TotalFileSize += int(FileSize)
+try:
+    for x in sys.stdin:
+        i += 1
+        match = re.match(pattern, x)
+        if (match):
+            FileSize = match.group(4)
+            addCodes(match.group(3))
+            TotalFileSize += int(FileSize)
 
-    if i == 10:
-        print(f'File size: {TotalFileSize}')
-        for code,nb in sorted(StatusCodes):
-            print(f'{code}: {nb}')
-        i = 0
-
-
-
-
-    
-    
+        if i == 10:
+            print(f'File size: {TotalFileSize}')
+            for code, nb in sorted(StatusCodes):
+                print(f'{code}: {nb}')
+            i = 0
+except KeyboardInterrupt:
+    print(f'File size: {TotalFileSize}')
+    for code, nb in sorted(StatusCodes):
+        print(f'{code}: {nb}')
