@@ -15,7 +15,8 @@ def addCodes(code):
 
 codes = ['200', '301', '400', '401', '403', '404', '405', '500']
 try:
-    pattern = (r'^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) - \[([^\]]+)\] '
+    pattern = (r'^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) - '
+               r'\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d+\] '
                r'"GET \/projects\/260 HTTP\/1\.1" (\d{3}) (\d+)$')
     i = 0
     TotalFileSize = 0
@@ -25,11 +26,11 @@ try:
         i += 1
         match = re.match(pattern, x)
         if (match):
-            if match.group(3) in codes:
-                FileSize = match.group(4)
-                addCodes(match.group(3))
+            if match.group(2) in codes:
+                FileSize = match.group(3)
+                addCodes(match.group(2))
                 TotalFileSize += int(FileSize)
-
+        print(x)
         if i % 10 == 0:
             print(f'File size: {TotalFileSize}')
             for code, nb in sorted(StatusCodes):
