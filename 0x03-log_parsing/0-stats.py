@@ -24,9 +24,9 @@ try:
         i += 1
         match = re.match(pattern, x)
         if (match):
-            if match.group(2) in codes:
-                FileSize = match.group(3)
-                addCodes(match.group(2))
+            if match.group(1) in codes:
+                FileSize = match.group(2)
+                addCodes(match.group(1))
                 TotalFileSize += int(FileSize)
 
         if i % 10 == 0:
