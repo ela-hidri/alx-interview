@@ -10,6 +10,7 @@ def validUTF8(data):
     """
     count = 0
     for byte in data:
+        byte = byte & 0xFF
         if count == 0:
             if byte >> 3 == 0b11110:
                 count = 3
