@@ -18,18 +18,18 @@ def canPlace(n, i, x, mx):
         if mx[m][x] == 1 or mx[i][m] == 1:
             return False
     for m in range(n):
-            if (i + m < n and x + m < n) :
-                if (mx[i + m][x + m] == 1) :
-                    return False
-            if (i + m < n and x - m >= 0) :
-                if (mx[i + m][x - m] == 1):
-                    return False
-            if i - m >= 0  and x + m < n: 
-                if (mx[i - m][x + m] == 1):
-                    return False
-            if (i - m >= 0 and x - m >= 0) :
-                if(mx[i - m][x - m] == 1):
-                    return False 
+        if (i + m < n and x + m < n):
+            if (mx[i + m][x + m] == 1):
+                return False
+        if (i + m < n and x - m >= 0):
+            if (mx[i + m][x - m] == 1):
+                return False
+        if i - m >= 0 and x + m < n:
+            if (mx[i - m][x + m] == 1):
+                return False
+        if (i - m >= 0 and x - m >= 0):
+            if(mx[i - m][x - m] == 1):
+                return False 
     return True
 
 
