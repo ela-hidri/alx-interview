@@ -15,16 +15,21 @@ def isDegit(n):
 def canPlace(n, i, x, mx):
     """check if can place qween"""
     for m in range(n):
-        if mx[m][x] == 1 or mx[i][m] == 1: return False
+        if mx[m][x] == 1 or mx[i][m] == 1:
+            return False
     for m in range(n):
-            if (i + m < n and x + m < n) : 
-                if (mx[i + m][x + m] == 1) : return False
+            if (i + m < n and x + m < n) :
+                if (mx[i + m][x + m] == 1) :
+                    return False
             if (i + m < n and x - m >= 0) :
-                if (mx[i + m][x - m] == 1): return False
+                if (mx[i + m][x - m] == 1):
+                    return False
             if i - m >= 0  and x + m < n: 
-                if (mx[i - m][x + m] == 1): return False
-            if (i - m >= 0 and x - m >= 0) : 
-                if(mx[i - m][x - m] == 1): return False 
+                if (mx[i - m][x + m] == 1):
+                    return False
+            if (i - m >= 0 and x - m >= 0) :
+                if(mx[i - m][x - m] == 1):
+                    return False 
     return True
 
 
@@ -61,7 +66,7 @@ if __name__ == "__main__":
         print("N must be a number")
         exit(1)
     n = int(n)
-    if  n < 4:
+    if n < 4:
         print("N must be at least 4")
         exit(1)
     mx = [[0 for _ in range(n)] for _ in range(n)]
