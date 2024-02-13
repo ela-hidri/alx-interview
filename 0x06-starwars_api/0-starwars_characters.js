@@ -1,25 +1,29 @@
 #!/usr/bin/node
+
 const argv = process.argv;
 const request = require('request');
-function Movies(){
-    request('https://swapi-api.alx-tools.com/api/films/' + argv[2], function (error, response, body) {
-    const ch = JSON.parse(body).characters;
-    fetchdata(ch);
-    if (error) {
-        console.error(error);
+
+async function Movies() {
+    try {
+        const body = await fetchData('https://swapi-api.alx-tools.com/api/films/' + argv[2]);
+        const characters = JSON.parse(body).characters;
+        await fetchCharacters(characters);
+    } catch (error) {
+        console.error('Error fetching movies:', error);
     }
-    });
 }
-async function fetchdata(ch){
-    for (const url in ch){
-        try {
-            const data = await makeRequest(url);
-            console.log(data); // Do something with the data
-        } catch (error) {
-            console.error('Error fetching data:', error);
+
+async function fetchCharacters(characters) {
+    try {
+        for (const url of characters) {
+            const name = await makeRequest(url);
+            console.log(name);
         }
+    } catch (error) {
+        console.error('Error fetching characters:', error);
     }
 }
+
 function makeRequest(url) {
     return new Promise((resolve, reject) => {
         request(url, (error, response, body) => {
@@ -27,13 +31,22 @@ function makeRequest(url) {
                 reject(error);
             } else {
                 const name = JSON.parse(body).name;
-                console.log(name);
-                if (error) {
-                    console.error(error);
-                }
+                resolve(name);
             }
         });
     });
 }
 
-Movies()
+async function fetchData(url) {
+    return new Promise((resolve, reject) => {
+        request(url, (error, response, body) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(body);
+            }
+        });
+    });
+}
+
+Movies();
