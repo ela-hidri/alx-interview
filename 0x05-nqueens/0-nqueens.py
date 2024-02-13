@@ -29,7 +29,7 @@ def canPlace(n, i, x, mx):
                 return False
         if (i - m >= 0 and x - m >= 0):
             if(mx[i - m][x - m] == 1):
-                return False 
+                return False
     return True
 
 
