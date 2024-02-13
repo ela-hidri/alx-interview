@@ -4,20 +4,22 @@ const request = require('request');
 function Movies(){
     request('https://swapi-api.alx-tools.com/api/films/' + argv[2], function (error, response, body) {
     const ch = JSON.parse(body).characters;
-    ch.forEach(async url => {
+    fetchdata(ch);
+    if (error) {
+        console.error(error);
+    }
+    });
+}
+async function fetchdata(ch){
+    for (const url in ch){
         try {
             const data = await makeRequest(url);
             console.log(data); // Do something with the data
         } catch (error) {
             console.error('Error fetching data:', error);
         }
-    });
-    if (error) {
-        console.error(error);
     }
-    });
 }
-
 function makeRequest(url) {
     return new Promise((resolve, reject) => {
         request(url, (error, response, body) => {
