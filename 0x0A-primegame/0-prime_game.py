@@ -4,24 +4,25 @@
 
 def isWinner(x, nums):
     """Determines the winner of the game."""
-    def sieve_of_eratosthenes(n):
-        """ get ll prime"""
-        sieve = [True] * (n + 1)
-        sieve[0] = sieve[1] = False
-        p = 2
-        while p * p <= n:
-            if sieve[p]:
-                for i in range(p * p, n + 1, p):
-                    sieve[i] = False
-            p += 1
-        return [i for i in range(2, n + 1) if sieve[i]]
+    def is_prime(num):
+        """Check if a number is prime."""
+        if num <= 1:
+            return False
+        for i in range(2, int(num**0.5) + 1):
+            if num % i == 0:
+                return False
+        return True
+
+    def getPrimes(n):
+        """Get a list of prime numbers less than or equal to n."""
+        return [num for num in range(2, n + 1) if is_prime(num)]
 
     ben_wins = 0
     maria_wins = 0
 
     for i in range(x):
         n = nums[i]
-        primes = sieve_of_eratosthenes(n)
+        primes = getPrimes(n)
         is_maria_turn = True
         while primes:
             if is_maria_turn:
