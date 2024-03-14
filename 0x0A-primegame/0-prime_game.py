@@ -9,14 +9,14 @@ def isWinner(x, nums):
     Maria_ben = True
     primes = []
     for i in range(x):
-        for j in range(1, nums[i]):
-            primes = getPrimes(j)
+        primes = getPrimes(nums[i])
+        for _ in range(1, nums[i]):
             if primes == [] and Maria_ben:
                 ben += 1
-                break
+                continue
             elif  primes == [] and not Maria_ben:
                 Maria += 1
-                break
+                continue
             if Maria_ben:
                 Maria_ben = False
                 Maria += 1
@@ -32,13 +32,17 @@ def isWinner(x, nums):
     else:
         return None
 
-            
-                
+
 
 def getPrimes(n):
     """check if primeNbr"""
-    primes = []
-    for i in range(2, n):
-        if (n % i) == 0:
-            primes.append(i)
-    return primes
+    def is_prime(num):
+        if num <= 1:
+            return False
+        for i in range(2, int(num**0.5) + 1):
+            if num % i == 0:
+                return False
+        return True
+
+    prime_list = [str(num) for num in range(2, n+1) if is_prime(num)]
+    return prime_list
