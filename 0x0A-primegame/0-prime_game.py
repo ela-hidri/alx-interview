@@ -4,18 +4,20 @@
 
 def isWinner(x, nums):
     """Determines the winner of the game."""
-    def is_prime(num):
-        """Check if a number is prime."""
-        if num <= 1:
-            return False
-        for i in range(2, int(num**0.5) + 1):
-            if num % i == 0:
-                return False
-        return True
-
     def getPrimes(n):
-        """Get a list of prime numbers less than or equal to n."""
-        return [num for num in range(2, n + 1) if is_prime(num)]
+        """Check if a number is prime."""
+        primes = []
+        prime = [True for i in range(n+1)]
+        p = 2
+        while (p * p <= n):
+            if (prime[p] == True):
+                for i in range(p * p, n+1, p):
+                    prime[i] = False
+            p += 1
+        for p in range(2, n+1):
+            if prime[p]:
+                primes.append(p)
+        return primes
 
     ben_wins = 0
     maria_wins = 0
