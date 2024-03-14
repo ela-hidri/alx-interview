@@ -1,42 +1,11 @@
 #!/usr/bin/python3
-""" solving Prime game"""
+"""Solving Prime game"""
 
 
 def isWinner(x, nums):
-    """ maria or ben wins """
-    ben = 0
-    Maria = 0
-    Maria_ben = True
-    primes = []
-    for i in range(x):
-        primes = getPrimes(nums[i])
-        for _ in range(1, nums[i]):
-            if primes == [] and Maria_ben:
-                ben += 1
-                continue
-            elif  primes == [] and not Maria_ben:
-                Maria += 1
-                continue
-            if Maria_ben:
-                Maria_ben = False
-                Maria += 1
-                primes.pop(0)
-            else:
-                Maria_ben = True
-                ben += 1
-                primes.pop(0)
-    if ben > Maria:
-        return "Ben"
-    elif Maria > ben:
-        return "Maria"
-    else:
-        return None
-
-
-
-def getPrimes(n):
-    """check if primeNbr"""
+    """Determines the winner of the game."""
     def is_prime(num):
+        """Check if a number is prime."""
         if num <= 1:
             return False
         for i in range(2, int(num**0.5) + 1):
@@ -44,5 +13,35 @@ def getPrimes(n):
                 return False
         return True
 
-    prime_list = [str(num) for num in range(2, n+1) if is_prime(num)]
-    return prime_list
+    def getPrimes(n):
+        """Get a list of prime numbers less than or equal to n."""
+        return [num for num in range(2, n + 1) if is_prime(num)]
+
+    ben_wins = 0
+    maria_wins = 0
+
+    for i in range(x):
+        n = nums[i]
+        primes = getPrimes(n)
+        is_maria_turn = True
+        while primes:
+            if is_maria_turn:
+                selected_prime = primes.pop(0)
+                primes = [num for num in primes if num % selected_prime != 0]
+                is_maria_turn = False
+            else:
+                selected_prime = primes.pop()
+                primes = [num for num in primes if num % selected_prime != 0]
+                is_maria_turn = True
+
+        if is_maria_turn:
+            ben_wins += 1
+        else:
+            maria_wins += 1
+
+    if ben_wins > maria_wins:
+        return "Ben"
+    elif maria_wins > ben_wins:
+        return "Maria"
+    else:
+        return None
